@@ -119,10 +119,34 @@ body{font-family:var(--font-b);background:var(--ink);color:var(--white);overflow
 
 /* DISTRICTS */
 .dist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.dist-pill{background:var(--ink2);border:1px solid var(--faint);border-radius:var(--r);padding:18px 22px;transition:.18s}
+.dist-pill{background:var(--ink2);border:1px solid var(--faint);border-radius:var(--r);padding:18px 22px;transition:.18s;cursor:pointer;position:relative}
 .dist-pill:hover{border-color:var(--blue);background:var(--ink3);transform:translateY(-2px)}
+.dist-pill-arrow{position:absolute;top:14px;right:16px;opacity:0;transition:.18s;color:var(--blue2)}
+.dist-pill:hover .dist-pill-arrow{opacity:1}
 .dist-name{font-family:var(--font-h);font-size:16px;font-weight:800;font-style:italic;text-transform:uppercase;margin-bottom:4px}
 .dist-type{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--slate)}
+
+/* DISTRICT MODAL */
+.dm-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px}
+.dm-title{font-family:var(--font-h);font-size:44px;font-weight:900;font-style:italic;text-transform:uppercase;line-height:1}
+.dm-type{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--blue2);margin-bottom:24px}
+.dm-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--faint);border-radius:var(--r2);overflow:hidden;margin-bottom:28px}
+.dm-stat{background:var(--ink3);padding:20px 22px}
+.dm-stat-n{font-family:var(--font-h);font-size:36px;font-weight:900;font-style:italic;color:var(--blue);line-height:1}
+.dm-stat-l{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--slate);margin-top:5px}
+.dm-programs-label{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--slate);margin-bottom:14px}
+.dm-program-list{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.dm-prog{display:flex;align-items:center;gap:12px;background:var(--ink3);border:1px solid var(--faint);border-radius:var(--r);padding:14px 16px}
+.dm-prog-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dot-blue{background:var(--blue2)}
+.dot-gold{background:var(--gold2)}
+.dot-green{background:var(--green)}
+.dot-slate{background:var(--slate)}
+.dm-prog-name{font-size:13px;font-weight:600;color:#cdd8f0;flex:1}
+.dm-prog-status{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:100px}
+.ps-active{background:rgba(20,184,122,.14);color:var(--green)}
+.ps-pilot{background:rgba(232,160,32,.14);color:var(--gold2)}
+.ps-planned{background:rgba(136,150,176,.14);color:var(--slate)}
 
 /* PARTNERS */
 .partner-row{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
@@ -490,20 +514,20 @@ footer{background:var(--ink2);border-top:1px solid var(--faint);padding:64px 56p
     <div class="sec-title">14 Districts.<br>One Ecosystem.</div>
     <p class="sec-body" style="margin-bottom:40px">Every public school district in Schuylkill County is part of the IU29 STEM network. No school — and no student — left behind.</p>
     <div class="dist-grid">
-      <div class="dist-pill"><div class="dist-name">Blue Mountain</div><div class="dist-type">Public SD</div></div>
-      <div class="dist-pill"><div class="dist-name">Mahanoy Area</div><div class="dist-type">Public SD</div></div>
-      <div class="dist-pill"><div class="dist-name">Minersville Area</div><div class="dist-type">Public SD</div></div>
-      <div class="dist-pill"><div class="dist-name">North Schuylkill</div><div class="dist-type">Public SD</div></div>
-      <div class="dist-pill"><div class="dist-name">Pine Grove Area</div><div class="dist-type">Public SD</div></div>
-      <div class="dist-pill"><div class="dist-name">Pottsville Area</div><div class="dist-type">Public SD</div></div>
-      <div class="dist-pill"><div class="dist-name">Saint Clair Area</div><div class="dist-type">Public SD</div></div>
-      <div class="dist-pill"><div class="dist-name">Schuylkill Haven</div><div class="dist-type">Public SD</div></div>
-      <div class="dist-pill"><div class="dist-name">Shenandoah Valley</div><div class="dist-type">Public SD</div></div>
-      <div class="dist-pill"><div class="dist-name">Tamaqua Area</div><div class="dist-type">Public SD</div></div>
-      <div class="dist-pill"><div class="dist-name">Tri-Valley</div><div class="dist-type">Public SD</div></div>
-      <div class="dist-pill"><div class="dist-name">Williams Valley</div><div class="dist-type">Public SD</div></div>
-      <div class="dist-pill"><div class="dist-name">Nativity BVM</div><div class="dist-type">Non-Public Partner</div></div>
-      <div class="dist-pill"><div class="dist-name">Good Shepherd</div><div class="dist-type">Non-Public Partner</div></div>
+      <div class="dist-pill" onclick="openDistrict('Blue Mountain')"><div class="dist-name">Blue Mountain</div><div class="dist-type">Public SD</div><svg class="dist-pill-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      <div class="dist-pill" onclick="openDistrict('Mahanoy Area')"><div class="dist-name">Mahanoy Area</div><div class="dist-type">Public SD</div><svg class="dist-pill-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      <div class="dist-pill" onclick="openDistrict('Minersville Area')"><div class="dist-name">Minersville Area</div><div class="dist-type">Public SD</div><svg class="dist-pill-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      <div class="dist-pill" onclick="openDistrict('North Schuylkill')"><div class="dist-name">North Schuylkill</div><div class="dist-type">Public SD</div><svg class="dist-pill-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      <div class="dist-pill" onclick="openDistrict('Pine Grove Area')"><div class="dist-name">Pine Grove Area</div><div class="dist-type">Public SD</div><svg class="dist-pill-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      <div class="dist-pill" onclick="openDistrict('Pottsville Area')"><div class="dist-name">Pottsville Area</div><div class="dist-type">Public SD</div><svg class="dist-pill-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      <div class="dist-pill" onclick="openDistrict('Saint Clair Area')"><div class="dist-name">Saint Clair Area</div><div class="dist-type">Public SD</div><svg class="dist-pill-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      <div class="dist-pill" onclick="openDistrict('Schuylkill Haven')"><div class="dist-name">Schuylkill Haven</div><div class="dist-type">Public SD</div><svg class="dist-pill-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      <div class="dist-pill" onclick="openDistrict('Shenandoah Valley')"><div class="dist-name">Shenandoah Valley</div><div class="dist-type">Public SD</div><svg class="dist-pill-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      <div class="dist-pill" onclick="openDistrict('Tamaqua Area')"><div class="dist-name">Tamaqua Area</div><div class="dist-type">Public SD</div><svg class="dist-pill-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      <div class="dist-pill" onclick="openDistrict('Tri-Valley')"><div class="dist-name">Tri-Valley</div><div class="dist-type">Public SD</div><svg class="dist-pill-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      <div class="dist-pill" onclick="openDistrict('Williams Valley')"><div class="dist-name">Williams Valley</div><div class="dist-type">Public SD</div><svg class="dist-pill-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      <div class="dist-pill" onclick="openDistrict('Nativity BVM')"><div class="dist-name">Nativity BVM</div><div class="dist-type">Non-Public Partner</div><svg class="dist-pill-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      <div class="dist-pill" onclick="openDistrict('Good Shepherd')"><div class="dist-name">Good Shepherd</div><div class="dist-type">Non-Public Partner</div><svg class="dist-pill-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
     </div>
   </div>
 </section>
@@ -545,9 +569,9 @@ footer{background:var(--ink2);border-top:1px solid var(--faint);padding:64px 56p
         <div class="ft-brand-title">Skook STEM · IU29</div>
         <div class="ft-brand-body">Schuylkill Intermediate Unit 29 is the regional educational agency serving all 14 school districts in Schuylkill County, Pennsylvania. The STEM Ecosystem program is led by the IU29 Supervisor of STEM &amp; District Support.</div>
         <div class="ft-contact">
-          <a href="mailto:gmacer@iu29.org">
+          <a href="/cdn-cgi/l/email-protection#86e1ebe7e5e3f4c6eff3b4bfa8e9f4e1">
             <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            gmacer@iu29.org
+            <span class="__cf_email__" data-cfemail="76111b17151304361f03444f58190411">[email&#160;protected]</span>
           </a>
           <a href="https://www.iu29.org" target="_blank">
             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
@@ -577,6 +601,26 @@ footer{background:var(--ink2);border-top:1px solid var(--faint);padding:64px 56p
   </div>
 </footer>
 
+<!-- ═══ DISTRICT MODAL ═══ -->
+<div class="overlay" id="district-modal">
+  <div class="modal">
+    <div class="dm-header">
+      <div>
+        <div class="dm-title" id="dm-title">District Name</div>
+        <div class="dm-type" id="dm-type">Public SD</div>
+      </div>
+      <button class="mclose" onclick="closeModal('district-modal')"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="dm-stats">
+      <div class="dm-stat"><div class="dm-stat-n" id="dm-students">—</div><div class="dm-stat-l">Students Reached</div></div>
+      <div class="dm-stat"><div class="dm-stat-n" id="dm-programs">—</div><div class="dm-stat-l">Active Programs</div></div>
+    </div>
+    <div class="dm-programs-label">IU29 Program Participation</div>
+    <div class="dm-program-list" id="dm-prog-list"></div>
+    <button class="msubmit blue" onclick="closeModal('district-modal');document.getElementById('p-district').value=currentDistrict+' SD';openModal('pitch-modal')">Pitch a Project for This District →</button>
+  </div>
+</div>
+
 <!-- ═══ PITCH MODAL ═══ -->
 <div class="overlay" id="pitch-modal">
   <div class="modal">
@@ -603,7 +647,7 @@ footer{background:var(--ink2);border-top:1px solid var(--faint);padding:64px 56p
     </div>
     <div class="field"><label>Project Description <span class="req-star">*</span></label><textarea id="p-desc" rows="4" placeholder="What equipment or program do you need? How many students will it reach? What will they make, build, or learn?"></textarea></div>
     <div class="field"><label>Estimated Student Reach</label><input type="number" id="p-reach" placeholder="e.g. 120"></div>
-    <div class="form-note">This form will connect directly to IU29 staff once backend integration is complete. For immediate requests, email gmacer@iu29.org directly.</div>
+    <div class="form-note">This form will connect directly to IU29 staff once backend integration is complete. For immediate requests, email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5d3a303c3e382f1d34286f6473322f3a">[email&#160;protected]</a> directly.</div>
     <button class="msubmit blue" onclick="submitPitch()">Send to IU29 STEM →</button>
   </div>
 </div>
@@ -629,7 +673,7 @@ footer{background:var(--ink2);border-top:1px solid var(--faint);padding:64px 56p
     <div class="check-field"><input type="checkbox" id="v-mentor"><label for="v-mentor">I want to mentor students directly (in-school visits, project guidance)</label></div>
     <div class="check-field"><input type="checkbox" id="v-consult"><label for="v-consult">I'm available to consult on equipment selection or curriculum design</label></div>
     <div class="check-field"><input type="checkbox" id="v-donate"><label for="v-donate">I may be able to donate tools, equipment, or materials</label></div>
-    <div class="form-note">Your info goes directly to Greg Macer at IU29. Backend integration coming soon — for immediate contact, reach out to gmacer@iu29.org.</div>
+    <div class="form-note">Your info goes directly to Greg Macer at IU29. Backend integration coming soon — for immediate contact, reach out to <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="14737975777166547d61262d3a7b6673">[email&#160;protected]</a>.</div>
     <button class="msubmit white" onclick="submitVolunteer()">I'm Ready to Help →</button>
   </div>
 </div>
@@ -647,7 +691,7 @@ footer{background:var(--ink2);border-top:1px solid var(--faint);padding:64px 56p
     <div class="gate-title">Staff Login</div>
     <div class="gate-body">Enter your IU29 staff passphrase to access the management dashboard and analytics. Contact Greg Macer to request access.</div>
     <div class="field"><label>Passphrase</label><input type="password" id="gate-pw" placeholder="Enter passphrase…" onkeydown="if(event.key==='Enter')checkGate()"></div>
-    <div class="gate-error" id="gate-err">Incorrect passphrase. Contact <a href="mailto:gmacer@iu29.org" style="color:var(--blue2)">gmacer@iu29.org</a> for access.</div>
+    <div class="gate-error" id="gate-err">Incorrect passphrase. Contact <a href="/cdn-cgi/l/email-protection#c9aea4a8aaacbb89a0bcfbf0e7a6bbae" style="color:var(--blue2)"><span class="__cf_email__" data-cfemail="1e79737f7d7b6c5e776b2c2730716c79">[email&#160;protected]</span></a> for access.</div>
     <div class="gate-btns">
       <button class="gate-enter" onclick="checkGate()">Enter Portal</button>
       <button class="gate-cancel" onclick="closeModal('gate-overlay')">Cancel</button>
@@ -684,13 +728,73 @@ footer{background:var(--ink2);border-top:1px solid var(--faint);padding:64px 56p
 <!-- ═══ TOAST ═══ -->
 <div id="toast"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span id="toast-msg"></span></div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ── MODAL UTILS
 function openModal(id){document.getElementById(id).classList.add('open')}
 function closeModal(id){document.getElementById(id).classList.remove('open')}
 document.querySelectorAll('.overlay').forEach(o=>{
   o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open')})
 })
+
+// ── DISTRICT DATA
+const PROGRAMS = [
+  {name:'Community MakerSpace Initiative', dot:'dot-blue'},
+  {name:'PA Keystone STEM Competition',    dot:'dot-gold'},
+  {name:'Sea Air & Land Challenge',        dot:'dot-gold'},
+  {name:'Educator AI Cohort',              dot:'dot-green'},
+  {name:'Computational Thinking PD',      dot:'dot-slate'},
+]
+const districts=[
+  {name:'Blue Mountain',   type:'Public SD',          students:380, progs:[
+    {i:0,status:'active'},{i:1,status:'active'},{i:3,status:'active'},{i:4,status:'pilot'}]},
+  {name:'Mahanoy Area',    type:'Public SD',          students:210, progs:[
+    {i:0,status:'pilot'},{i:1,status:'planned'},{i:4,status:'pilot'}]},
+  {name:'Minersville Area',type:'Public SD',          students:185, progs:[
+    {i:0,status:'pilot'},{i:3,status:'planned'},{i:4,status:'planned'}]},
+  {name:'North Schuylkill',type:'Public SD',          students:420, progs:[
+    {i:0,status:'active'},{i:1,status:'active'},{i:2,status:'active'},{i:3,status:'active'},{i:4,status:'active'}]},
+  {name:'Pine Grove Area', type:'Public SD',          students:290, progs:[
+    {i:0,status:'active'},{i:1,status:'planned'},{i:4,status:'pilot'}]},
+  {name:'Pottsville Area', type:'Public SD',          students:450, progs:[
+    {i:0,status:'active'},{i:1,status:'active'},{i:2,status:'pilot'},{i:3,status:'active'},{i:4,status:'active'}]},
+  {name:'Saint Clair Area',type:'Public SD',          students:160, progs:[
+    {i:0,status:'pilot'},{i:4,status:'planned'}]},
+  {name:'Schuylkill Haven',type:'Public SD',          students:240, progs:[
+    {i:0,status:'active'},{i:1,status:'planned'},{i:3,status:'pilot'},{i:4,status:'pilot'}]},
+  {name:'Shenandoah Valley',type:'Public SD',         students:195, progs:[
+    {i:0,status:'active'},{i:1,status:'active'},{i:4,status:'pilot'}]},
+  {name:'Tamaqua Area',    type:'Public SD',          students:310, progs:[
+    {i:0,status:'active'},{i:1,status:'active'},{i:2,status:'planned'},{i:3,status:'active'},{i:4,status:'active'}]},
+  {name:'Tri-Valley',      type:'Public SD',          students:175, progs:[
+    {i:0,status:'pilot'},{i:1,status:'planned'},{i:4,status:'planned'}]},
+  {name:'Williams Valley', type:'Public SD',          students:140, progs:[
+    {i:0,status:'pilot'},{i:4,status:'planned'}]},
+  {name:'Nativity BVM',    type:'Non-Public Partner', students:90,  progs:[
+    {i:0,status:'pilot'},{i:1,status:'planned'}]},
+  {name:'Good Shepherd',   type:'Non-Public Partner', students:80,  progs:[
+    {i:0,status:'planned'},{i:4,status:'planned'}]},
+]
+
+let currentDistrict=''
+
+function openDistrict(name){
+  const d=districts.find(x=>x.name===name)
+  if(!d) return
+  currentDistrict=d.name
+  document.getElementById('dm-title').textContent=d.name
+  document.getElementById('dm-type').textContent=d.type
+  document.getElementById('dm-students').textContent=d.students.toLocaleString()+' est.'
+  document.getElementById('dm-programs').textContent=d.progs.filter(p=>p.status==='active').length+' active'
+  const statusLabel={active:'Active',pilot:'Pilot',planned:'Planned'}
+  const statusClass={active:'ps-active',pilot:'ps-pilot',planned:'ps-planned'}
+  document.getElementById('dm-prog-list').innerHTML=d.progs.map(p=>`
+    <div class="dm-prog">
+      <div class="dm-prog-dot ${PROGRAMS[p.i].dot}"></div>
+      <div class="dm-prog-name">${PROGRAMS[p.i].name}</div>
+      <span class="dm-prog-status ${statusClass[p.status]}">${statusLabel[p.status]}</span>
+    </div>`).join('')
+  openModal('district-modal')
+}
 
 // ── GATE
 function openGate(){
@@ -900,17 +1004,4 @@ function renderMentors(){
         <div>
           <div class="mentor-name">${m.name}</div>
           <div class="mentor-bg">${m.bg}</div>
-          <div class="mentor-xp">Skills: ${m.xp}</div>
-          <div class="mentor-loc">📍 ${m.loc} · Interest: ${m.interest}</div>
-        </div>
-        <div class="mentor-acts">
-          <span class="mentor-status ${m.status==='New'?'ms-new':'ms-cont'}">${m.status}</span>
-          <button class="m-btn mb-blue" onclick="toast('Opening email to ${m.name}…')">Contact</button>
-          <button class="m-btn mb-ghost" onclick="toast('${m.name} queued for next available project match.')">Match to Project</button>
-        </div>
-      </div>`).join('')}
-    </div>`
-}
-</script>
-</body>
-</html>
+      
