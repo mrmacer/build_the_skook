@@ -1,0 +1,2506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schuylkill STEM Ecosystem — Partner Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night:         #0c1014;
+    --slate:         #18222c;
+    --slate-mid:     #253545;
+    --slate-light:   #3d5468;
+    --forest:        #152018;
+    --moss:          #1f3323;
+    --fern:          #2d5231;
+    --sage:          #5a8a5c;
+    --mist:          #b8d4ba;
+    --maroon:        #7b2238;
+    --maroon-light:  #9e2d48;
+    --ember:         #c45a1a;
+    --ember-light:   #d97730;
+    --gold:          #b8922a;
+    --gold-light:    #d4ac4e;
+    --cream:         #f5f1e9;
+    --cream-dark:    #ede5d7;
+    --parchment:     #e8e0d0;
+    --white:         #fefcf8;
+    --ink:           #1a1a18;
+    --text-mid:      #3d3d3a;
+    --text-light:    #6b6b68;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ═══════════════════════════════════════════
+     STICKY NAV
+  ═══════════════════════════════════════════ */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 3.5rem;
+    height: 68px;
+    background: rgba(12, 16, 20, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.3s;
+  }
+
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+
+  .nav-mark {
+    width: 32px;
+    height: 32px;
+    background: var(--ember);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .nav-mark svg { display: block; }
+
+  .nav-wordmark {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.45;
+  }
+
+  .nav-wordmark strong {
+    display: block;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 0.12em;
+    font-size: 0.67rem;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.25rem;
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.42);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: rgba(255,255,255,0.85); }
+
+  .nav-cta {
+    font-size: 0.72rem !important;
+    font-weight: 600 !important;
+    color: var(--white) !important;
+    background: var(--maroon);
+    padding: 0.55rem 1.35rem;
+    border-radius: 2px;
+    letter-spacing: 0.1em !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--maroon-light) !important; }
+
+  /* ═══════════════════════════════════════════
+     HERO
+  ═══════════════════════════════════════════ */
+  .hero {
+    min-height: 100vh;
+    background: var(--night);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Diagonal ridge lines — anthracite texture */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        168deg, transparent 0, transparent 72px,
+        rgba(255,255,255,0.012) 72px, rgba(255,255,255,0.012) 73px
+      ),
+      repeating-linear-gradient(
+        158deg, transparent 0, transparent 110px,
+        rgba(255,255,255,0.008) 110px, rgba(255,255,255,0.008) 111px
+      );
+    pointer-events: none;
+  }
+
+  /* Ember glow bottom-left */
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -15%;
+    left: -8%;
+    width: 65%;
+    height: 75%;
+    background: radial-gradient(ellipse, rgba(123,34,56,0.45) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  /* Mountain silhouette watermark */
+  .hero-mountain {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 55%;
+    max-width: 720px;
+    opacity: 0.045;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Gold glow top-right */
+  .hero-glow {
+    position: absolute;
+    top: -10%;
+    right: -5%;
+    width: 50%;
+    height: 60%;
+    background: radial-gradient(ellipse, rgba(184,146,42,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .hero-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 5;
+    padding: 10rem 3.5rem 4rem;
+    max-width: 860px;
+  }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.2s forwards;
+  }
+
+  .eyebrow::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--gold-light);
+    flex-shrink: 0;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(3.2rem, 6.5vw, 6rem);
+    line-height: 1.0;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.35s forwards;
+  }
+
+  .hero h1 em {
+    color: var(--gold-light);
+    font-style: italic;
+  }
+
+  .hero h1 .line-accent {
+    color: var(--mist);
+    font-style: italic;
+  }
+
+  .hero-lead {
+    font-size: 1.1rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.58);
+    max-width: 540px;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.5s forwards;
+  }
+
+  .hero-lead strong {
+    color: rgba(255,255,255,0.85);
+    font-weight: 500;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.65s forwards;
+  }
+
+  .btn-primary {
+    background: var(--maroon);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.9rem 2rem;
+    border-radius: 2px;
+    border: 1px solid var(--maroon);
+    transition: all 0.22s;
+  }
+
+  .btn-primary:hover { background: var(--maroon-light); border-color: var(--maroon-light); }
+
+  .btn-ghost {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.9rem 2rem;
+    border-radius: 2px;
+    border: 1px solid rgba(255,255,255,0.18);
+    transition: all 0.22s;
+  }
+
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: white; }
+
+  /* Stats strip */
+  .hero-stats {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding: 0 3.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.8s forwards;
+  }
+
+  .stat {
+    flex: 1;
+    padding: 1.75rem 2rem 1.75rem 0;
+    border-right: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .stat:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-label {
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+
+  /* ═══════════════════════════════════════════
+     SHARED SECTION STYLES
+  ═══════════════════════════════════════════ */
+  .section-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .section-eyebrow::before {
+    content: '';
+    display: block;
+    width: 22px;
+    height: 1px;
+    background: var(--ember);
+    flex-shrink: 0;
+  }
+
+  .section-eyebrow.on-dark { color: var(--gold-light); }
+  .section-eyebrow.on-dark::before { background: var(--gold-light); }
+  .section-eyebrow.sage-eye { color: var(--sage); }
+  .section-eyebrow.sage-eye::before { background: var(--sage); }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.12;
+    color: var(--slate);
+    margin-bottom: 1rem;
+  }
+
+  h2 em { color: var(--maroon); font-style: italic; }
+  h2.on-dark { color: var(--white); }
+  h2.on-dark em { color: var(--gold-light); }
+
+  .section-lead {
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.78;
+    color: var(--text-mid);
+    max-width: 580px;
+  }
+
+  .section-lead.on-dark { color: rgba(255,255,255,0.55); }
+  .section-lead strong { font-weight: 600; }
+
+  /* ═══════════════════════════════════════════
+     CORE IDEA / BIG TEXT
+  ═══════════════════════════════════════════ */
+  .core-idea {
+    background: var(--cream);
+    padding: 7rem 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .core-idea::before {
+    content: 'SKOOK';
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: 22vw;
+    font-weight: 900;
+    color: rgba(45,82,49,0.04);
+    top: 50%;
+    right: -2%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    pointer-events: none;
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
+  .core-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 6rem;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .core-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 2.4vw, 2rem);
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--forest);
+    border-left: 4px solid var(--ember);
+    padding-left: 1.75rem;
+  }
+
+  .core-quote em { font-style: italic; color: var(--fern); }
+
+  .core-pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--cream-dark);
+    border: 1px solid var(--cream-dark);
+  }
+
+  .cpillar {
+    background: var(--white);
+    padding: 1.5rem;
+    transition: background 0.2s;
+  }
+
+  .cpillar:hover { background: var(--cream); }
+
+  .cpillar-icon {
+    width: 34px;
+    height: 34px;
+    margin-bottom: 0.65rem;
+    color: var(--maroon);
+  }
+
+  .cpillar-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--slate);
+    margin-bottom: 0.35rem;
+  }
+
+  .cpillar-desc {
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: var(--text-light);
+  }
+
+  /* ═══════════════════════════════════════════
+     WHY IT MATTERS — AUDIENCE CARDS
+  ═══════════════════════════════════════════ */
+  .why-section {
+    background: var(--white);
+    padding: 7rem 3.5rem;
+  }
+
+  .why-inner { max-width: 1100px; margin: 0 auto; }
+
+  .why-header { margin-bottom: 3.5rem; }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .why-card {
+    padding: 2rem 2rem 1.75rem;
+    border: 1px solid var(--cream-dark);
+    border-top: 4px solid var(--fern);
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.25s, transform 0.25s;
+  }
+
+  .why-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 60%, rgba(45,82,49,0.03));
+    pointer-events: none;
+  }
+
+  .why-card:hover {
+    box-shadow: 0 8px 36px rgba(0,0,0,0.08);
+    transform: translateY(-3px);
+  }
+
+  .why-card.ember-top { border-top-color: var(--ember); }
+  .why-card.gold-top  { border-top-color: var(--gold); }
+  .why-card.moss-top  { border-top-color: var(--slate-mid); }
+
+  .why-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--slate);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+
+  .why-card p {
+    font-size: 0.9rem;
+    line-height: 1.72;
+    color: var(--text-mid);
+    font-weight: 300;
+  }
+
+  .why-card p strong { font-weight: 600; color: var(--ink); }
+
+  .card-tag-strip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 0.85rem;
+  }
+
+  .card-tag-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--fern);
+    flex-shrink: 0;
+  }
+
+  .card-tag-dot.ember { background: var(--ember); }
+  .card-tag-dot.gold  { background: var(--gold); }
+  .card-tag-dot.slate { background: var(--slate-mid); }
+
+  /* ═══════════════════════════════════════════
+     WHAT WE'RE BUILDING
+  ═══════════════════════════════════════════ */
+  .building-section {
+    background: var(--forest);
+    padding: 7rem 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .building-section::before {
+    content: 'BUILD';
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: 28vw;
+    font-weight: 900;
+    color: rgba(255,255,255,0.025);
+    bottom: -4%;
+    right: -3%;
+    pointer-events: none;
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
+  .building-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .build-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    background: rgba(255,255,255,0.05);
+    margin-top: 3rem;
+  }
+
+  .build-pillar {
+    background: rgba(255,255,255,0.03);
+    padding: 2.25rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: background 0.2s;
+  }
+
+  .build-pillar:hover { background: rgba(255,255,255,0.06); }
+
+  .build-icon {
+    font-size: 1.75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .build-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+    margin-bottom: -0.5rem;
+  }
+
+  .build-name {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+  }
+
+  .build-desc {
+    font-size: 0.84rem;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.38);
+    font-weight: 300;
+  }
+
+  /* ═══════════════════════════════════════════
+     STAKEHOLDER TABS
+  ═══════════════════════════════════════════ */
+  .stakeholders {
+    background: var(--white);
+    padding: 7rem 3.5rem;
+  }
+
+  /* ═══════════════════════════════════════════
+     IN PRACTICE SCENARIOS
+  ═══════════════════════════════════════════ */
+  .in-practice {
+    background: var(--cream);
+    padding: 7rem 3.5rem;
+  }
+
+  .in-practice-inner { max-width: 1100px; margin: 0 auto; }
+
+  .scenarios-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .scenario-card {
+    background: var(--white);
+    border: 1px solid var(--cream-dark);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scenario-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--ember);
+  }
+
+  .scenario-card.green-top::before { background: var(--fern); }
+  .scenario-card.gold-top::before  { background: var(--gold); }
+  .scenario-card.slate-top::before { background: var(--slate-mid); }
+
+  .scenario-who {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 0.75rem;
+  }
+
+  .scenario-card.green-top .scenario-who { color: var(--fern); }
+  .scenario-card.gold-top  .scenario-who { color: var(--gold); }
+  .scenario-card.slate-top .scenario-who { color: var(--slate-mid); }
+
+  .scenario-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--slate);
+    margin-bottom: 0.85rem;
+    line-height: 1.3;
+  }
+
+  .scenario-body {
+    font-size: 0.85rem;
+    line-height: 1.72;
+    color: var(--text-mid);
+    font-weight: 300;
+  }
+
+  .scenario-body strong { font-weight: 600; color: var(--ink); }
+
+  .scenario-result {
+    margin-top: 1.1rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--cream-dark);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--ember);
+    line-height: 1.5;
+  }
+
+  .scenario-card.green-top .scenario-result { color: var(--fern); }
+  .scenario-card.gold-top  .scenario-result { color: var(--gold); }
+  .scenario-card.slate-top .scenario-result { color: var(--slate-light); }
+
+  @media (max-width: 960px) {
+    .in-practice { padding: 5rem 1.75rem; }
+    .scenarios-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 600px) {
+    .scenarios-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ════════════════════════════════════════════ */
+
+  .stakeholders-header {
+    max-width: 1100px;
+    margin: 0 auto 3rem;
+  }
+
+  .audience-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--cream-dark);
+    margin-bottom: 3rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .audience-tabs::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 1rem 1.6rem;
+    cursor: pointer;
+    white-space: nowrap;
+    margin-bottom: -2px;
+    transition: all 0.2s;
+  }
+
+  .tab-btn:hover { color: var(--maroon); }
+  .tab-btn.active { color: var(--maroon); border-bottom-color: var(--maroon); }
+
+  .tab-panel { display: none; max-width: 1100px; margin: 0 auto; }
+  .tab-panel.active {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .program-card {
+    border: 1px solid var(--cream-dark);
+    padding: 1.75rem;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.25s;
+  }
+
+  .program-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 3px; height: 100%;
+    background: var(--maroon);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.25s;
+  }
+
+  .program-card:hover {
+    border-color: var(--maroon);
+    box-shadow: 0 4px 24px rgba(123,34,56,0.07);
+  }
+
+  .program-card:hover::before { transform: scaleY(1); }
+
+  .card-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.65rem;
+  }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--slate);
+    margin-bottom: 0.55rem;
+    line-height: 1.3;
+  }
+
+  .card-desc {
+    font-size: 0.84rem;
+    line-height: 1.68;
+    color: var(--text-mid);
+    margin-bottom: 1.2rem;
+    font-weight: 300;
+  }
+
+  .card-link {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--maroon);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .card-link::after { content: '→'; transition: transform 0.2s; }
+  .card-link:hover::after { transform: translateX(5px); }
+
+  /* ═══════════════════════════════════════════
+     HOW IT WORKS
+  ═══════════════════════════════════════════ */
+  .framework {
+    background: var(--slate);
+    padding: 7rem 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .framework::before {
+    content: 'ECOSYSTEM';
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: 18vw;
+    font-weight: 900;
+    color: rgba(255,255,255,0.018);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: -0.04em;
+  }
+
+  .framework-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(255,255,255,0.04);
+    margin-top: 3rem;
+  }
+
+  .step {
+    background: var(--slate);
+    padding: 2.75rem 2rem;
+    position: relative;
+    transition: background 0.2s;
+  }
+
+  .step:hover { background: var(--slate-mid); }
+
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 900;
+    color: rgba(255,255,255,0.05);
+    position: absolute;
+    top: 1.25rem;
+    right: 1.5rem;
+    line-height: 1;
+  }
+
+  .step-dot {
+    width: 9px; height: 9px;
+    background: var(--gold-light);
+    border-radius: 50%;
+    margin-bottom: 1.25rem;
+  }
+
+  .step-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.65rem;
+  }
+
+  .step-desc {
+    font-size: 0.84rem;
+    line-height: 1.68;
+    color: rgba(255,255,255,0.42);
+    font-weight: 300;
+  }
+
+  /* ═══════════════════════════════════════════
+     PARTNERS SECTION
+  ═══════════════════════════════════════════ */
+  .partners-section {
+    background: var(--cream);
+    padding: 7rem 3.5rem;
+  }
+
+  .partners-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .partner-list {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .partner-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid rgba(45,82,49,0.1);
+  }
+
+  .partner-item:first-child { border-top: 1px solid rgba(45,82,49,0.1); }
+
+  .partner-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.56rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: var(--forest);
+    color: var(--mist);
+    padding: 3px 8px;
+    white-space: nowrap;
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+
+  .partner-badge.ember { background: var(--ember); color: white; }
+  .partner-badge.gold  { background: var(--gold); color: var(--ink); }
+  .partner-badge.sage  { background: var(--fern); color: var(--mist); }
+
+  .partner-info h4 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--slate);
+    margin-bottom: 0.2rem;
+  }
+
+  .partner-info p {
+    font-size: 0.8rem;
+    line-height: 1.55;
+    color: var(--text-light);
+    font-weight: 300;
+  }
+
+  /* Ask box */
+  .ask-box {
+    background: var(--night);
+    padding: 2.5rem;
+    position: sticky;
+    top: 88px;
+  }
+
+  .ask-box-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 0.6rem;
+  }
+
+  .ask-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 1.75rem;
+    line-height: 1.25;
+  }
+
+  .ask-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.58);
+    font-weight: 300;
+  }
+
+  .ask-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .ask-arrow {
+    color: var(--ember);
+    font-size: 0.8rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  /* Partner pill strip */
+  .partner-strip {
+    background: var(--slate);
+    padding: 3rem 3.5rem;
+    text-align: center;
+  }
+
+  .partner-strip-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.28);
+    margin-bottom: 1.75rem;
+  }
+
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.65rem 1.25rem;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .pill {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.05);
+    padding: 0.45rem 1.1rem;
+    border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  /* ═══════════════════════════════════════════
+     THE GENERATOR QUOTE
+  ═══════════════════════════════════════════ */
+  .generator {
+    background: var(--night);
+    padding: 8rem 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .generator::before {
+    content: '\201C';
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: 35vw;
+    font-weight: 900;
+    color: rgba(255,255,255,0.02);
+    top: -5%;
+    left: -2%;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  /* Ember glow pulse */
+  .generator::after {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 50%;
+    height: 80%;
+    background: radial-gradient(ellipse, rgba(196,90,26,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .generator-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .gen-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .gen-label::before {
+    content: '';
+    display: block;
+    width: 22px;
+    height: 1px;
+    background: var(--ember);
+    flex-shrink: 0;
+  }
+
+  .gen-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2.4rem);
+    font-weight: 700;
+    font-style: italic;
+    line-height: 1.4;
+    color: rgba(255,255,255,0.88);
+    margin-bottom: 1.75rem;
+  }
+
+  .gen-quote span { color: var(--ember-light); }
+
+  .gen-attr {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.28);
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--ember);
+  }
+
+  /* ═══════════════════════════════════════════
+     SKOOK FACT
+  ═══════════════════════════════════════════ */
+  .skook-fact {
+    background: var(--moss);
+    padding: 4rem 3.5rem;
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .skook-badge {
+    background: var(--ember);
+    color: white;
+    padding: 5px 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  .skook-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    font-style: italic;
+    line-height: 1.65;
+    color: var(--mist);
+    max-width: 680px;
+  }
+
+  .skook-text strong {
+    font-style: normal;
+    color: var(--white);
+  }
+
+  /* ═══════════════════════════════════════════
+     CONNECT / FORM
+  ═══════════════════════════════════════════ */
+  .connect {
+    background: var(--white);
+    padding: 8rem 3.5rem;
+  }
+
+  .connect-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .connect-text { padding-top: 0.5rem; }
+  .connect-text h2 { margin-bottom: 1.25rem; }
+  .connect-text .section-lead { margin-bottom: 1.5rem; }
+
+  .contact-items {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .contact-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .contact-icon {
+    width: 38px; height: 38px;
+    background: var(--cream);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--maroon);
+  }
+
+  .contact-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 0.2rem;
+  }
+
+  .contact-value {
+    font-size: 0.9rem;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* Form */
+  .connect-form {
+    background: var(--cream);
+    padding: 2.5rem;
+    border: 1px solid var(--cream-dark);
+  }
+
+  .form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--slate);
+    margin-bottom: 0.4rem;
+  }
+
+  .form-sub {
+    font-size: 0.84rem;
+    color: var(--text-light);
+    margin-bottom: 1.75rem;
+    line-height: 1.55;
+  }
+
+  .form-group { margin-bottom: 1.1rem; }
+
+  .form-group label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--slate-mid);
+    margin-bottom: 0.35rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    background: var(--white);
+    border: 1px solid var(--cream-dark);
+    padding: 0.7rem 0.95rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--ink);
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--maroon); }
+
+  .form-group textarea { height: 96px; resize: vertical; }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
+    margin-bottom: 0;
+  }
+
+  .form-row .form-group { margin-bottom: 0; }
+
+  .form-row-wrap { margin-bottom: 1.1rem; }
+
+  .btn-submit {
+    width: 100%;
+    margin-top: 0.75rem;
+    background: var(--maroon);
+    color: white;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 1rem;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-submit:hover { background: var(--maroon-light); }
+
+  /* ═══════════════════════════════════════════
+     FOOTER
+  ═══════════════════════════════════════════ */
+  footer {
+    background: var(--night);
+    padding: 2.75rem 3.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+
+  .footer-mark {
+    width: 28px; height: 28px;
+    background: var(--ember);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .footer-brand-text {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.32);
+    line-height: 1.5;
+  }
+
+  .footer-brand-text strong {
+    display: block;
+    color: rgba(255,255,255,0.55);
+    font-size: 0.75rem;
+  }
+
+  .footer-copy {
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.22);
+  }
+
+  .footer-copy a { color: rgba(255,255,255,0.3); text-decoration: none; }
+  .footer-copy a:hover { color: rgba(255,255,255,0.6); }
+
+  .footer-nav {
+    display: flex;
+    gap: 1.75rem;
+  }
+
+  .footer-nav a {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.28);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-nav a:hover { color: rgba(255,255,255,0.65); }
+
+  /* ═══════════════════════════════════════════
+     DISTRICTS
+  ═══════════════════════════════════════════ */
+  .districts-section {
+    background: var(--night);
+    padding: 7rem 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .districts-section::before {
+    content: '14';
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: 38vw;
+    font-weight: 900;
+    color: rgba(255,255,255,0.018);
+    top: 50%;
+    right: -4%;
+    transform: translateY(-50%);
+    line-height: 1;
+    pointer-events: none;
+    letter-spacing: -0.04em;
+  }
+
+  .districts-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .districts-header {
+    margin-bottom: 3.5rem;
+  }
+
+  .districts-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 5vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.0;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .districts-lead {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.72;
+    color: rgba(255,255,255,0.45);
+    max-width: 520px;
+  }
+
+  .districts-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.65rem;
+  }
+
+  .district-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.4rem 1.5rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 4px;
+    text-decoration: none;
+    position: relative;
+    transition: background 0.22s, border-color 0.22s, transform 0.22s;
+    min-height: 90px;
+    overflow: hidden;
+  }
+
+  .district-card:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: var(--gold-light);
+    transform: translateY(-2px);
+  }
+
+  .district-card:hover .district-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .district-card--featured {
+    border-color: rgba(212,172,78,0.4);
+    background: rgba(212,172,78,0.05);
+  }
+
+  .district-card--featured:hover {
+    background: rgba(212,172,78,0.1);
+    border-color: var(--gold-light);
+  }
+
+  .district-card--nonpublic {
+    background: rgba(255,255,255,0.025);
+    border-color: rgba(255,255,255,0.05);
+  }
+
+  .district-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.25;
+    margin-bottom: 0.35rem;
+  }
+
+  .district-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.28);
+  }
+
+  .district-type--nonpublic {
+    color: var(--gold);
+    opacity: 0.7;
+  }
+
+  .district-arrow {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    font-size: 0.85rem;
+    color: var(--gold-light);
+    opacity: 0;
+    transform: translateX(-5px);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  @media (max-width: 960px) {
+    .districts-section { padding: 5rem 1.75rem; }
+    .districts-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 600px) {
+    .districts-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ═══════════════════════════════════════════
+     ANIMATIONS
+  ═══════════════════════════════════════════ */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ═══════════════════════════════════════════
+     RESPONSIVE
+  ═══════════════════════════════════════════ */
+  @media (max-width: 960px) {
+    nav { padding: 0 1.75rem; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    .hero-content, .hero-stats { padding-left: 1.75rem; padding-right: 1.75rem; }
+    .core-inner, .partners-inner, .connect-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .why-grid, .build-grid, .steps { grid-template-columns: 1fr 1fr; }
+    .core-idea, .why-section, .building-section,
+    .stakeholders, .framework, .partners-section,
+    .generator, .connect { padding: 5rem 1.75rem; }
+    .skook-fact { padding: 3rem 1.75rem; }
+    footer { padding: 2rem 1.75rem; }
+    .partner-strip { padding: 2.5rem 1.75rem; }
+    .ask-box { position: static; }
+    .hero-stats { flex-wrap: wrap; padding: 0 1.75rem; }
+    .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .stat:last-child { border-bottom: none; }
+  }
+
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 2.6rem; }
+    .why-grid, .build-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .footer-nav { gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <div class="nav-brand">
+    <div class="nav-mark">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M8 1L14 5V11L8 15L2 11V5L8 1Z" stroke="white" stroke-width="1.2" fill="none"/>
+        <circle cx="8" cy="8" r="2" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="nav-wordmark">
+      <strong>STEM Ecosystem</strong>
+      Schuylkill County · IU29
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="#why">Why It Matters</a>
+    <a href="#programs">Programs</a>
+    <a href="#partners">Partners</a>
+    <a href="#districts">Districts</a>
+    <a href="#connect" class="nav-cta">Become a Partner</a>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow"></div>
+
+  <!-- Stylized mountain ridge -->
+  <svg class="hero-mountain" viewBox="0 0 900 320" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMax slice">
+    <path d="M0 320 L100 200 L180 240 L280 120 L360 170 L460 60 L540 110 L640 30 L720 80 L820 10 L900 50 L900 320 Z" fill="white"/>
+    <path d="M0 320 L60 260 L120 280 L200 200 L260 220 L340 150 L420 180 L500 100 L580 130 L660 70 L740 95 L820 50 L900 75 L900 320 Z" fill="white" opacity="0.4"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="eyebrow">Schuylkill County, PA · IU29 · Building What's Next</div>
+    <h1>Building<br>the <em>Skook</em><br><span class="line-accent">STEM Ecosystem.</span></h1>
+    <p class="hero-lead">
+      Schuylkill County has what most regions spend millions trying to manufacture: <strong>a living classroom</strong>. Working rivers. Anthracite heritage. Conservation lands. Working farms. An industrial history that shaped the country — and a next generation that deserves to know it. We're not asking you to fund a program. We're inviting you to <strong>help build the infrastructure that connects all of it.</strong>
+    </p>
+    <div class="hero-btns">
+      <a href="#programs" class="btn-primary">See Partnership Pathways</a>
+      <a href="#connect" class="btn-ghost">Start a Conversation</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">12</div>
+      <div class="stat-label">Public School Districts</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">~10K</div>
+      <div class="stat-label">Students in the Network</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Active Competitions This Year</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">IU29</div>
+      <div class="stat-label">The Connective Tissue</div>
+    </div>
+  </div>
+</header>
+
+<!-- ══ CORE IDEA ══ -->
+<section class="core-idea">
+  <div class="core-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">The Core Idea</div>
+      <div class="core-quote">
+        Students in Schuylkill County should graduate knowing <em>this place</em> — its ecosystems, its history, its industries, its future. And they should leave equipped to contribute to it.
+      </div>
+      <p style="margin-top: 1.75rem; font-size: 0.95rem; line-height: 1.78; color: var(--text-mid); font-weight: 300; max-width: 480px;">
+        IU29 is the regional education agency for all 12 public school districts in Schuylkill County — the organization that sits between the state and local schools and makes county-wide collaboration possible. We don't own the classrooms. We don't set the curriculum. But we broker the connections, coordinate the logistics, and make sure a great idea in Mahanoy City can also reach a student in Williams Valley.
+      </p>
+      <p style="margin-top: 1rem; font-size: 0.95rem; line-height: 1.78; color: var(--text-mid); font-weight: 300; max-width: 480px;">
+        What does that infrastructure look like? A Tamaqua 6th grader collecting water samples from the Little Schuylkill alongside a Conservation District scientist. A Williams Valley teacher and a Blue Mountain teacher planning the same field experience with a local environmental researcher — because IU29 made the introduction.
+      </p>
+      <p style="margin-top: 1rem; font-size: 0.95rem; line-height: 1.78; color: var(--text-mid); font-weight: 600; max-width: 480px;">
+        We don't own the work. We make the work work <em>together.</em>
+      </p>
+    </div>
+    <div class="core-pillars reveal">
+      <div class="cpillar">
+        <svg class="cpillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"/>
+        </svg>
+        <div class="cpillar-title">Partnerships</div>
+        <div class="cpillar-desc">Connecting schools with the Conservation District, STC, Chamber, higher ed, and employers who already exist here — so students learn from the actual world they live in.</div>
+      </div>
+      <div class="cpillar">
+        <svg class="cpillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+        </svg>
+        <div class="cpillar-title">Teaching & Learning</div>
+        <div class="cpillar-desc">STEELS-aligned science built around local phenomena — the Schuylkill watershed, Hawk Mountain migration data, abandoned mine drainage, and working farmland.</div>
+      </div>
+      <div class="cpillar">
+        <svg class="cpillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+        </svg>
+        <div class="cpillar-title">Workforce</div>
+        <div class="cpillar-desc">Mapping real career pathways in healthcare, advanced manufacturing, environmental services, and trades — so students see a future here, not just somewhere else.</div>
+      </div>
+      <div class="cpillar">
+        <svg class="cpillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+        </svg>
+        <div class="cpillar-title">Measurement</div>
+        <div class="cpillar-desc">Tracking student participation, teacher connections, and partner touchpoints — so every organization in the network can show their stakeholders that this investment delivered.</div>
+      </div>
+      <div class="cpillar" style="grid-column: span 2;">
+        <svg class="cpillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/>
+        </svg>
+        <div class="cpillar-title">Systems</div>
+        <div class="cpillar-desc">One shared partner directory. One point of coordination. So organizations that want to reach schools don't have to knock on 12 different district doors to start.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHY IT MATTERS ══ -->
+<section class="why-section" id="why">
+  <div class="why-inner">
+    <div class="why-header reveal">
+      <div class="section-eyebrow">Why It Matters Now</div>
+      <h2>Why this matters —<br>to <em>you, specifically.</em></h2>
+      <p class="section-lead">Every kind of partner has a different stake in what we're building. Here's what it means for yours.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card ember-top reveal">
+        <div class="card-tag-strip"><span class="card-tag-dot ember"></span>Conservation &amp; Environment</div>
+        <h3>For Conservation &amp; Environmental Partners</h3>
+        <p>The next stewards of the Schuylkill River, Hawk Mountain, and our conservation lands are sitting in classrooms right now. They don't know it yet — because no one's introduced them to the place they live in. Through structured field partnerships — ones we're actively building — students can run real water quality tests on the Schuylkill, engage with raptor migration data, and participate in watershed work with the Conservation District. <strong>We can build those moments together — before students leave.</strong> Field experiences with real scientists build the emotional connection that creates lifelong advocates — and your next generation of staff.</p>
+      </div>
+      <div class="why-card gold-top reveal">
+        <div class="card-tag-strip"><span class="card-tag-dot gold"></span>Business &amp; Workforce</div>
+        <h3>For Business &amp; Workforce Partners</h3>
+        <p>Schuylkill County's employers tell us the same thing: they can't find enough qualified people locally. The pipeline starts leaking before graduation — it starts when students can't picture themselves in a career that exists down the road. The "brain drain" begins with disconnection. Students who tour a plant floor, shadow an engineer, or build something real for a local company are measurably more likely to see a future here. <strong>Your company doesn't need to build a program. You need to show up once.</strong> STEM literacy built around local industries is workforce development that starts in 6th grade.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="card-tag-strip"><span class="card-tag-dot"></span>Teachers &amp; Districts</div>
+        <h3>For Teachers &amp; Districts</h3>
+        <p>Pennsylvania's STEELS standards require three-dimensional, phenomenon-based science instruction. That's not an add-on — it's a fundamental shift in how science gets taught. And it's harder to execute when you're already stretched. The ecosystem doesn't add to your prep burden — it adds to your options: field sites, industry partners, working scientists, all coordinated and curriculum-aligned. <strong>We handle the logistics. You bring the students.</strong> One good ecosystem connection can fuel two or three units of study that you didn't have to build alone.</p>
+      </div>
+      <div class="why-card moss-top reveal">
+        <div class="card-tag-strip"><span class="card-tag-dot slate"></span>Workforce Agencies &amp; County</div>
+        <h3>For Workforce Agencies &amp; County Organizations</h3>
+        <p>Connecting students to careers isn't just a school job. It takes CareerLink, county planning offices, adult education programs, and workforce development agencies working <em>alongside</em> schools — not parallel to them. IU29 is the bridge between education and economic development in Schuylkill County. If your agency is trying to build talent pipelines, address workforce gaps, or reach students before they leave — <strong>this ecosystem is the most direct route in.</strong> We coordinate the school relationships so you don't have to start from scratch with 12 different school districts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHAT WE'RE BUILDING ══ -->
+<section class="building-section">
+  <div class="building-inner">
+    <div class="reveal">
+      <div class="section-eyebrow on-dark">What We're Building</div>
+      <h2 class="on-dark" style="max-width:600px;">Not a program.<br>An <em>infrastructure.</em></h2>
+      <p class="section-lead on-dark" style="max-width:520px; margin-top: 0.75rem;">
+        Here's what's already running — and what we're actively building out. Some of this is new. Most of it builds on work IU29 and our district partners have been doing for years.
+      </p>
+    </div>
+    <div class="build-grid reveal">
+      <div class="build-pillar">
+        <div class="build-icon">🏆</div>
+        <div class="build-num">01</div>
+        <div class="build-name">Competitions</div>
+        <div class="build-desc">Sea Air &amp; Land. PA Keystone STEM. WSCAM — active this year. IU29 coordinates registration, recruits industry judges from our partner network, and supports teams across all 12 districts. These aren't add-on extracurriculars. They're the most visible proof that Schuylkill County students can compete, build, and problem-solve at a high level.</div>
+      </div>
+      <div class="build-pillar">
+        <div class="build-icon">🔬</div>
+        <div class="build-num">02</div>
+        <div class="build-name">Environmental Science</div>
+        <div class="build-desc">Schuylkill County has more hands-on science than any textbook can hold. We're building this out through SCD and actively pursuing field partnerships with organizations like Hawk Mountain, the River Trust, and DCNR — so students can collect real water quality data from the Schuylkill, count raptors on the ridge, and learn forestry in state game lands. This is STEELS-aligned science no worksheet can replicate.</div>
+      </div>
+      <div class="build-pillar">
+        <div class="build-icon">🛠️</div>
+        <div class="build-num">03</div>
+        <div class="build-name">MakerSpace Network</div>
+        <div class="build-desc">IU29 operates a makerspace and mobile creative lab that serves schools across the county — bringing tools and facilitated making to districts that couldn't otherwise afford them. Making is how students who hate worksheets fall in love with engineering. We're building equitable access to that experience for every corner of this county.</div>
+      </div>
+      <div class="build-pillar">
+        <div class="build-icon">👩‍🏫</div>
+        <div class="build-num">04</div>
+        <div class="build-name">Teacher PD</div>
+        <div class="build-desc">A teacher who learns to use the Schuylkill River as a science phenomenon doesn't need a new curriculum — they need a connection we can make for them. IU29 runs educator cohorts focused on place-based STEM: local phenomena, local data, local industry voices. Every partnership we build gets translated into teacher-ready curriculum.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ IN PRACTICE ══ -->
+<section class="in-practice">
+  <div class="in-practice-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">What This Actually Looks Like</div>
+      <h2>Partnership in <em>practice.</em></h2>
+      <p class="section-lead">Not a framework. Not a flow chart. Here's what happens when an organization decides to show up.</p>
+    </div>
+    <div class="scenarios-grid">
+
+      <div class="scenario-card reveal">
+        <div class="scenario-who">Manufacturing Partner</div>
+        <div class="scenario-title">Two hours at a competition. One conversation that changed a career trajectory.</div>
+        <p class="scenario-body">A regional manufacturer sends one staff member to judge the PA Keystone STEM Competition — two hours on a Saturday. She evaluates three student teams presenting engineering design solutions. She leaves with two business cards from teachers who want to bring students to the plant floor. <strong>By May, 22 students from two districts have done a half-day industry tour.</strong> None of them had ever been inside a manufacturing facility before.</p>
+        <div class="scenario-result">What it cost: one day of one person's time.</div>
+      </div>
+
+      <div class="scenario-card green-top reveal">
+        <div class="scenario-who">Conservation Partner</div>
+        <div class="scenario-title">A sanctuary has data. A Tamaqua 7th grader has a question. IU29 makes the introduction.</div>
+        <p class="scenario-body">IU29 works with a 7th grade science teacher to build a three-week unit around the fall raptor migration count. Students learn to use eBird, practice field observation protocols, and connect with a local conservation researcher during peak migration week. The unit satisfies three STEELS performance expectations. <strong>The teacher didn't build it alone — she built it with us.</strong> This is the kind of partnership we're actively working to make real.</p>
+        <div class="scenario-result">What it would cost: one planning conversation and one site visit.</div>
+      </div>
+
+      <div class="scenario-card gold-top reveal">
+        <div class="scenario-who">Library Partner</div>
+        <div class="scenario-title">The library had the community trust. IU29 had the programming. Neither could do it alone.</div>
+        <p class="scenario-body">IU29 brings makerspace materials and a facilitator for four Saturday events. The library brings the families. <strong>63 kids show up to the first "Build It" session</strong> — the most families the director has seen on a Saturday in years. Several parents ask how to connect their child to school STEM programs. The library gets programming. IU29 gets reach.</p>
+        <div class="scenario-result">What it cost: an open door and a couple of hours.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ STAKEHOLDER TABS ══ -->
+<section class="stakeholders" id="programs">
+  <div class="stakeholders-header reveal">
+    <div class="section-eyebrow">Find Your Place In This</div>
+    <h2>There's a role for every<br>kind of <em>partner.</em></h2>
+    <p class="section-lead">Select your sector to see how you can plug in — from a single conversation to a deep, ongoing partnership. No wrong door in.</p>
+  </div>
+
+  <div class="audience-tabs">
+    <button class="tab-btn active" onclick="showTab('business', this)">Businesses &amp; Employers</button>
+    <button class="tab-btn" onclick="showTab('schools', this)">Schools &amp; Districts</button>
+    <button class="tab-btn" onclick="showTab('nonprofits', this)">Nonprofits &amp; Community</button>
+    <button class="tab-btn" onclick="showTab('highered', this)">Higher Education</button>
+    <button class="tab-btn" onclick="showTab('libraries', this)">Libraries &amp; Cultural Orgs</button>
+    <button class="tab-btn" onclick="showTab('community', this)">Individuals &amp; Families</button>
+    <button class="tab-btn" onclick="showTab('workforce', this)">Workforce &amp; Transition</button>
+  </div>
+
+  <!-- Business -->
+  <div class="tab-panel active" id="tab-business">
+    <div class="program-card">
+      <div class="card-tag">Competition Programs</div>
+      <div class="card-title">STEM Competition Judging</div>
+      <div class="card-desc">Show up for two hours and see what the next generation of your workforce can actually do. IU29 handles the scheduling, the rubrics, and the student prep — you bring your expertise and honest feedback. Companies who judge our competitions have walked away with intern leads. <strong>That's a pipeline built in an afternoon.</strong></div>
+      <a href="#connect" class="card-link">Get Involved</a>
+    </div>
+    <div class="program-card">
+      <div class="card-tag">Career Awareness</div>
+      <div class="card-title">Guest Speaker &amp; Industry Tours</div>
+      <div class="card-desc">You don't need a lesson plan. Tell us what your company does, what problems you solve, and what a career in your building looks like. IU29 matches you to a classroom, preps the teacher, and coordinates the visit. A single honest 45-minute conversation with a working professional changes more student trajectories than a semester of career awareness programming.</div>
+      <a href="#connect" class="card-link">Get Involved</a>
+    </div>
+    <div class="program-card">
+      <div class="card-tag">Workforce Pipeline</div>
+      <div class="card-title">Internship &amp; Job Shadow Pathways</div>
+      <div class="card-desc">Help build formalized pathways for students to explore careers in your industry. The ecosystem connects your participation to Portrait of a Graduate outcomes for schools.</div>
+      <a href="#connect" class="card-link">Get Involved</a>
+    </div>
+    <div class="program-card">
+      <div class="card-tag">Community Investment</div>
+      <div class="card-title">Sponsor a MakerSpace Event</div>
+      <div class="card-desc">Support hands-on STEM programming, maker showcases, or community innovation events. Your investment is visible, local, and directly tied to student and community outcomes.</div>
+      <a href="#connect" class="card-link">Get Involved</a>
+    </div>
+    <div class="program-card">
+      <div class="card-tag">Strategic Input</div>
+      <div class="card-title">Ecosystem Advisory Role</div>
+      <div class="card-desc">Help shape the direction of STEM education in Schuylkill County. Advisory partners provide industry insight on workforce needs — so schools are building toward real opportunities, not guessing.</div>
+      <a href="#connect" class="card-link">Get Involved</a>
+    </div>
+    <div class="program-card">
+      <div class="card-tag">Visibility</div>
+      <div class="card-title">Ecosystem Partner Spotlight</div>
+      <div class="card-desc">Be featured in the Schuylkill STEM Ecosystem hub as a recognized partner. Visibility to schools, families, students, and fellow community organizations across the county.</div>
+      <a href="#connect" class="card-link">Get Involved</a>
+    </div>
+  </div>
+
+  <!-- Schools -->
+  <div class="tab-panel" id="tab-schools">
+    <div class="program-card">
+      <div class="card-tag">Student Leadership</div>
+      <div class="card-title">Chief Science Officer (CSO) Program</div>
+      <div class="card-desc">The CSO program gives students a real title, a real role, and a real audience. Chief Science Officers represent their school's voice in STEM — attending county-level convenings, presenting at community events, and helping peers understand why science matters beyond the classroom. It's not a club. It's a leadership identity.</div>
+      <a href="#connect" class="card-link">Learn More</a>
+    </div>
+    <div class="program-card">
+      <div class="card-tag">Infrastructure &amp; Access</div>
+      <div class="card-title">MakerSpace &amp; Mobile Creative Lab</div>
+      <div class="card-desc">Access to IU29's makerspace resources, mobile maker equipment, and design-thinking facilitation to bring hands-on, creative STEM experiences to your students.</div>
+      <a href="#connect" class="card-link">Learn More</a>
+    </div>
+    <div class="program-card">
+      <div class="card-tag">Competitions</div>
+      <div class="card-title">STEM Competition Network</div>
+      <div class="card-desc">Participate in PA Keystone STEM, Sea Air &amp; Land Challenge, WSCAM, and more. IU29 facilitates competition access, coordination, and connections to industry judges already in our network.</div>
+      <a href="#connect" class="card-link">Learn More</a>
+    </div>
+    <div class="program-card">
+      <div class="card-tag">Professional Development</div>
+      <div class="card-title">Educator STEM PD</div>
+      <div class="card-desc">IU29's STEM PD is built around the county you're already in — not imported frameworks. We develop cohort experiences using Schuylkill County's landscape, industries, and community partners as the curriculum. Teachers come out with locally-grounded units, real partner contacts, and a cross-district network doing the same work.</div>
+      <a href="#connect" class="card-link">Learn More</a>
+    </div>
+    <div class="program-card">
+      <div class="card-tag">Alignment</div>
+      <div class="card-title">Portrait of a Graduate Support</div>
+      <div class="card-desc">IU29 helps districts connect STEM programming to Portrait of a Graduate outcomes — making the case for STEM investment using the language your board and administration already speak.</div>
+      <a href="#connect" class="card-link">Learn More</a>
+    </div>
+  </div>
+
+  <!-- Nonprofits -->
+  <div class="tab-panel" id="tab-nonprofits">
+    <div class="program-card">
+      <div class="card-tag">Events</div>
+      <div class="card-title">Co-Host a Community STEM Event</div>
+      <div class="card-desc">Partner with IU29 to bring STEM programming into your community space or alongside your existing events. We bring the curriculum and connections; you bring the community relationship.</div>
+      <a href="#connect" class="card-link">Get Involved</a>
+    </div>
+    <div class="program-card">
+      <div class="card-tag">Visibility</div>
+      <div class="card-title">Share What You're Already Doing</div>
+      <div class="card-desc">The first step is the easiest: let us amplify what your organization already does. We'll feature your programs, events, and opportunities in the ecosystem hub to connect you with schools and families.</div>
+      <a href="#connect" class="card-link">Get Involved</a>
+    </div>
+    <div class="program-card">
+      <div class="card-tag">School Connections</div>
+      <div class="card-title">School-Nonprofit Partnerships</div>
+      <div class="card-desc">IU29 can broker relationships between your organization and school districts for after-school, enrichment, or community-based STEM programming that serves students beyond the school day.</div>
+      <a href="#connect" class="card-link">Get Involved</a>
+    </div>
+    <div class="program-card">
+      <div class="card-tag">Programming</div>
+      <div class="card-title">After-School &amp; Summer STEM</div>
+      <div class="card-desc">Collaborate on extended-learning STEM experiences. We connect your capacity to district needs, student populations, and ecosystem-aligned outcomes to maximize impact for both organizations.</div>
+      <a href="#connect" class="card-link">Get Involved</a>
+    </div>
+  </div>
+
+  <!-- Higher Ed -->
+  <div class="tab-panel" id="tab-highered">
+    <div class="program-card">
+      <div class="card-tag">Student Pathways</div>
+      <div class="card-title">Dual Enrollment &amp; Early College</div>
+      <div class="card-desc">Create visible, accessible pathways for Schuylkill County students into your institution. Ecosystem alignment makes these connections visible to schools, counselors, and families.</div>
+      <a href="#connect" class="card-link">Get Involved</a>
+    </div>
+    <div class="program-card">
+      <div class="card-tag">Student Experience</div>
+      <div class="card-title">Research &amp; Inquiry Connections</div>
+      <div class="card-desc">Connect secondary students to research experiences, faculty mentors, or lab environments — building STEM identity and post-secondary aspiration through authentic scientific engagement.</div>
+      <a href="#connect" class="card-link">Get Involved</a>
+    </div>
+    <div class="program-card">
+      <div class="card-tag">Professional Development</div>
+      <div class="card-title">Educator PD Collaboration</div>
+      <div class="card-desc">Co-develop professional development experiences for teachers. Your academic expertise + IU29's implementation infrastructure = PD that actually sticks in real classrooms.</div>
+      <a href="#connect" class="card-link">Get Involved</a>
+    </div>
+    <div class="program-card">
+      <div class="card-tag">Data &amp; Impact</div>
+      <div class="card-title">Ecosystem Measurement Partnership</div>
+      <div class="card-desc">Help IU29 document and measure ecosystem impact. Partner with us on data collection, analysis, and storytelling to make the case for STEM investment across the region.</div>
+      <a href="#connect" class="card-link">Get Involved</a>
+    </div>
+  </div>
+
+  <!-- Libraries -->
+  <div class="tab-panel" id="tab-libraries">
+    <div class="program-card">
+      <div class="card-tag">Programming</div>
+      <div class="card-title">Maker Programming Co-Design</div>
+      <div class="card-desc">Build or expand maker programming in your library or cultural space. IU29 provides design support, equipment resources, and connections to educator networks that can support your work.</div>
+      <a href="#connect" class="card-link">Get Involved</a>
+    </div>
+    <div class="program-card">
+      <div class="card-tag">Hosting</div>
+      <div class="card-title">STEM Event Hosting</div>
+      <div class="card-desc">Libraries are the most trusted public space in most of our communities — and they're open evenings and weekends when schools aren't. IU29 brings the programming, materials, and facilitation. You bring the space and the community relationship you've spent years building. The best-attended STEM events we've run haven't been at schools at all.</div>
+      <a href="#connect" class="card-link">Get Involved</a>
+    </div>
+    <div class="program-card">
+      <div class="card-tag">Outreach</div>
+      <div class="card-title">Family STEM Nights</div>
+      <div class="card-desc">Co-facilitate family engagement events that bring STEM into the hands of students, parents, and siblings. Libraries reach the community members schools sometimes can't — and that gap matters.</div>
+      <a href="#connect" class="card-link">Get Involved</a>
+    </div>
+  </div>
+
+  <!-- Community -->
+  <div class="tab-panel" id="tab-community">
+    <div class="program-card">
+      <div class="card-tag">Mentorship</div>
+      <div class="card-title">Volunteer as a STEM Mentor</div>
+      <div class="card-desc">You don't need a PhD to make a difference. Share your experience, your story, or your skills with students exploring STEM fields. Ecosystem mentors are matched with school programs and competitions.</div>
+      <a href="#connect" class="card-link">Get Involved</a>
+    </div>
+    <div class="program-card">
+      <div class="card-tag">Career Storytelling</div>
+      <div class="card-title">Share Your Career Story</div>
+      <div class="card-desc">Students need to see real people from their community doing real things. A 30-minute career conversation with a classroom can shift a student's entire sense of what's possible for them.</div>
+      <a href="#connect" class="card-link">Get Involved</a>
+    </div>
+    <div class="program-card">
+      <div class="card-tag">Open Your Door</div>
+      <div class="card-title">Host a Student for a Day</div>
+      <div class="card-desc">A job shadow. A 30-minute site visit. Letting a student ask you what you actually do every day. These small acts have outsized impact on students who've never seen the inside of a professional environment in their own county. Skilled tradespeople, nurses, business owners, forest technicians — you're all qualified. Let us make the connection.</div>
+      <a href="#connect" class="card-link">Get Involved</a>
+    </div>
+  </div>
+
+  <!-- Workforce & Transition -->
+  <div class="tab-panel" id="tab-workforce">
+    <div class="program-card">
+      <div class="card-tag">Work-Based Learning</div>
+      <div class="card-title">Work-Based Learning Connections</div>
+      <div class="card-desc">IU29 coordinates work-based learning placements that connect high school students with local employers. If your business has wanted a structured way to bring in student observers, shadows, or interns — we can build that bridge without starting from scratch.</div>
+      <a href="#connect" class="card-link">Get Involved</a>
+    </div>
+    <div class="program-card">
+      <div class="card-tag">CareerLink &amp; Career Awareness</div>
+      <div class="card-title">Career Pathway Visibility</div>
+      <div class="card-desc">Partner with IU29 to bring CareerLink programming, labor market data, and career counseling resources into school settings. Students making career decisions need real county-level information — not national statistics. We can help make that connection count.</div>
+      <a href="#connect" class="card-link">Get Involved</a>
+    </div>
+    <div class="program-card">
+      <div class="card-tag">Transition Programs</div>
+      <div class="card-title">Transition Partnership for Students with Disabilities</div>
+      <div class="card-desc">Students in IU29's transition programs need STEM exposure and career pathway visibility as much as any other student. The ecosystem creates more employer opportunities — and makes it easier for organizations to participate in transition planning without navigating school bureaucracy alone.</div>
+      <a href="#connect" class="card-link">Get Involved</a>
+    </div>
+    <div class="program-card">
+      <div class="card-tag">Adult Education</div>
+      <div class="card-title">Adult &amp; Continuing Education</div>
+      <div class="card-desc">The ecosystem isn't only for K–12. If your organization serves adult learners, GED completers, or career-changers, there's a connection here — to digital literacy, workforce credentials, and community learning opportunities IU29 already supports across the county.</div>
+      <a href="#connect" class="card-link">Get Involved</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HOW IT WORKS ══ -->
+<section class="framework">
+  <div class="framework-inner">
+    <div class="reveal">
+      <div class="section-eyebrow on-dark">How Partnership Works</div>
+      <h2 class="on-dark">Start simple.<br>Grow <em>intentionally.</em></h2>
+      <p class="section-lead on-dark" style="margin-bottom: 3rem;">No giant commitment required to start. Every ecosystem partnership begins with a conversation and a small first step.</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-dot"></div>
+        <div class="step-title">Tell Us Your Story</div>
+        <div class="step-desc">A 30-minute conversation — no pitch, no agenda, no commitment. Tell us about your organization, what you care about, and what you have capacity for. Most partners are surprised by how many connection points already exist. We've had this conversation with conservation scientists, factory floor managers, university deans, and librarians. The starting point is always the same: <em>what do you wish students understood about what you do?</em></div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-dot"></div>
+        <div class="step-title">Start With One Thing</div>
+        <div class="step-desc">We identify one concrete first step based on what you actually told us — not a pre-packaged program option. A classroom visit. A competition judging slot. A shared field site. One genuine touchpoint is worth more than a year of "strategic alignment." We build the bridge; you walk across it first and see if it's worth crossing again.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-dot"></div>
+        <div class="step-title">Let It Compound</div>
+        <div class="step-desc">The partnerships that matter most start small and grow organically. A judging appearance becomes an advisory role. A field site becomes a co-designed curriculum unit. A career conversation becomes a job shadow program. We don't push the pace. We follow your capacity and your conviction — and keep making it easy to stay connected.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PARTNERS ══ -->
+<section class="partners-section" id="partners">
+  <div class="partners-inner">
+    <div>
+      <div class="section-eyebrow reveal">Current Partners &amp; Who We're Building Toward</div>
+      <h2 class="reveal">The network is already<br><em>working.</em></h2>
+      <p class="section-lead reveal" style="margin-top: 0.75rem;">Some of these organizations are active partners today. Others are organizations we're actively working to connect with — because they're exactly the kind of community assets that belong in this ecosystem. We're not claiming credit for conversations we haven't had yet; we're being transparent about where we want to go.</p>
+      <div class="partner-list reveal">
+        <div class="partner-item">
+          <span class="partner-badge sage">Env.</span>
+          <div class="partner-info">
+            <h4>Schuylkill Conservation District</h4>
+            <p>Students collect macroinvertebrate data, test water quality, and work alongside SCD staff in the field — real conservation science, not simulations.</p>
+          </div>
+        </div>
+        <div class="partner-item">
+          <span class="partner-badge sage">Sought</span>
+          <div class="partner-info">
+            <h4>Schuylkill River Trail &amp; Trust</h4>
+            <p>A partner we'd love to have. The river itself is a natural science classroom — from headwaters ecology to industrial heritage to active restoration work. We're actively working to build this connection.</p>
+          </div>
+        </div>
+        <div class="partner-item">
+          <span class="partner-badge sage">Sought</span>
+          <div class="partner-info">
+            <h4>Hawk Mountain Sanctuary</h4>
+            <p>One of the world's premier raptor research sites sits 20 minutes from most of our districts. We'd love for students to count hawks, work with real migration data, and connect with working scientists — and we're working toward making that happen.</p>
+          </div>
+        </div>
+        <div class="partner-item">
+          <span class="partner-badge gold">Biz.</span>
+          <div class="partner-info">
+            <h4>Schuylkill Area Chamber of Commerce</h4>
+            <p>Connects the ecosystem to regional employers — coordinating career fairs, industry panels, and business-to-classroom connections across the county.</p>
+          </div>
+        </div>
+        <div class="partner-item">
+          <span class="partner-badge ember">Sought</span>
+          <div class="partner-info">
+            <h4>DCNR / Pennsylvania State Parks</h4>
+            <p>Field access to state forest and park lands for environmental science programming — forestry science, habitat study, and data collection in the actual landscape — is exactly the kind of partnership we're actively pursuing.</p>
+          </div>
+        </div>
+        <div class="partner-item">
+          <span class="partner-badge">Sought</span>
+          <div class="partner-info">
+            <h4>Penn State Schuylkill &amp; Alvernia University</h4>
+            <p>Post-secondary pathways, faculty mentorship, and research connections that give students a reason to see higher education as something built for people like them — relationships we're actively working to formalize.</p>
+          </div>
+        </div>
+        <div class="partner-item">
+          <span class="partner-badge gold">Sought</span>
+          <div class="partner-info">
+            <h4>Phoenix Contact</h4>
+            <p>A regional manufacturing anchor we'd love to have in this ecosystem — from competition judging to student facility tours and workforce pipeline development. This is a relationship we're actively working to build.</p>
+          </div>
+        </div>
+        <div class="partner-item">
+          <span class="partner-badge">CTE</span>
+          <div class="partner-info">
+            <h4>Schuylkill Technology Center</h4>
+            <p>Two campuses. Hundreds of CTE students. The critical bridge between academic STEM and real workforce pathways — trades, health sciences, technology, and more.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ask-box reveal">
+      <div class="ask-box-eyebrow">From Potential Partners</div>
+      <h3>What We're<br>Actually Asking</h3>
+      <div class="ask-item">
+        <span class="ask-arrow">→</span>
+        A 30-minute conversation — no pitch, no agenda, no commitment
+      </div>
+      <div class="ask-item">
+        <span class="ask-arrow">→</span>
+        One connection point: open your door to students — a site, a field, a conversation in your space
+      </div>
+      <div class="ask-item">
+        <span class="ask-arrow">→</span>
+        Permission to list your organization as a community partner in the ecosystem
+      </div>
+      <div class="ask-item">
+        <span class="ask-arrow">→</span>
+        Your honest feedback on what a <em>genuinely useful</em> partnership with schools looks like — from your side, not ours
+      </div>
+      <div class="ask-item">
+        <span class="ask-arrow">→</span>
+        If things go well: a willing staff member who helps shape what we build together
+      </div>
+      <div style="margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.82rem; line-height: 1.6; color: rgba(255,255,255,0.45); font-weight: 300;">
+        <strong style="color: rgba(255,255,255,0.75); display: block; margin-bottom: 0.3rem;">We are not asking for money.</strong>
+        We are asking for your time, your expertise, and your belief that the students in this county deserve to know the people and places that make it worth staying in.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PARTNER PILL STRIP ══ -->
+<div class="partner-strip">
+  <p class="partner-strip-label">Organizations connected to the Schuylkill STEM Network</p>
+  <div class="pills">
+    <span class="pill">Schuylkill Technology Center</span>
+    <span class="pill">Schuylkill Conservation District</span>
+    <span class="pill">Schuylkill Area Community Foundation</span>
+    <span class="pill">Schuylkill Area Chamber of Commerce</span>
+    <span class="pill">12 Member School Districts</span>
+    <span class="pill">PA Keystone STEM Competition</span>
+    <span class="pill">Sea Air &amp; Land Challenge</span>
+    <span class="pill">WSCAM</span>
+  </div>
+</div>
+
+<!-- ══ DISTRICTS ══ -->
+<section class="districts-section" id="districts">
+  <div class="districts-inner">
+    <div class="districts-header reveal">
+      <div class="section-eyebrow on-dark">Schuylkill County · IU29</div>
+      <h2 class="districts-headline">12 Public Districts.<br>One Ecosystem.</h2>
+      <p class="districts-lead">Every public school district in Schuylkill County is part of the IU29 STEM network — plus non-public partners committed to the same mission. No school — and no student — left behind.</p>
+    </div>
+
+    <div class="districts-grid reveal">
+
+      <a href="https://www.bmsd.org/" target="_blank" rel="noopener" class="district-card">
+        <div class="district-name">Blue Mountain</div>
+        <div class="district-type">Public SD</div>
+        <span class="district-arrow">→</span>
+      </a>
+
+      <a href="https://www.mabears.net/" target="_blank" rel="noopener" class="district-card">
+        <div class="district-name">Mahanoy Area</div>
+        <div class="district-type">Public SD</div>
+        <span class="district-arrow">→</span>
+      </a>
+
+      <a href="https://www.battlinminers.com/" target="_blank" rel="noopener" class="district-card">
+        <div class="district-name">Minersville Area</div>
+        <div class="district-type">Public SD</div>
+        <span class="district-arrow">→</span>
+      </a>
+
+      <a href="https://www.northschuylkill.net/" target="_blank" rel="noopener" class="district-card">
+        <div class="district-name">North Schuylkill</div>
+        <div class="district-type">Public SD</div>
+        <span class="district-arrow">→</span>
+      </a>
+
+      <a href="https://www.pgasd.com/" target="_blank" rel="noopener" class="district-card">
+        <div class="district-name">Pine Grove Area</div>
+        <div class="district-type">Public SD</div>
+        <span class="district-arrow">→</span>
+      </a>
+
+      <a href="https://www.pottsville.k12.pa.us/" target="_blank" rel="noopener" class="district-card district-card--featured">
+        <div class="district-name">Pottsville Area</div>
+        <div class="district-type">Public SD</div>
+        <span class="district-arrow">→</span>
+      </a>
+
+      <a href="https://www.saintclairsd.org/" target="_blank" rel="noopener" class="district-card">
+        <div class="district-name">Saint Clair Area</div>
+        <div class="district-type">Public SD</div>
+        <span class="district-arrow">→</span>
+      </a>
+
+      <a href="https://www.haven.k12.pa.us/" target="_blank" rel="noopener" class="district-card">
+        <div class="district-name">Schuylkill Haven</div>
+        <div class="district-type">Public SD</div>
+        <span class="district-arrow">→</span>
+      </a>
+
+      <a href="https://svbluedevils.org/" target="_blank" rel="noopener" class="district-card">
+        <div class="district-name">Shenandoah Valley</div>
+        <div class="district-type">Public SD</div>
+        <span class="district-arrow">→</span>
+      </a>
+
+      <a href="https://www.tamaqua.k12.pa.us/" target="_blank" rel="noopener" class="district-card">
+        <div class="district-name">Tamaqua Area</div>
+        <div class="district-type">Public SD</div>
+        <span class="district-arrow">→</span>
+      </a>
+
+      <a href="https://www.tvdawgs.net/" target="_blank" rel="noopener" class="district-card">
+        <div class="district-name">Tri-Valley</div>
+        <div class="district-type">Public SD</div>
+        <span class="district-arrow">→</span>
+      </a>
+
+      <a href="https://www.wvschools.net/" target="_blank" rel="noopener" class="district-card">
+        <div class="district-name">Williams Valley</div>
+        <div class="district-type">Public SD</div>
+        <span class="district-arrow">→</span>
+      </a>
+
+      <a href="https://www.nativitybvm.net/" target="_blank" rel="noopener" class="district-card district-card--nonpublic">
+        <div class="district-name">Nativity BVM</div>
+        <div class="district-type district-type--nonpublic">Non-Public Partner</div>
+        <span class="district-arrow">→</span>
+      </a>
+
+      <a href="#connect" class="district-card district-card--nonpublic">
+        <div class="district-name">Good Shepherd</div>
+        <div class="district-type district-type--nonpublic">Non-Public Partner</div>
+        <span class="district-arrow">→</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ THE GENERATOR ══ -->
+<section class="generator">
+  <div class="generator-inner">
+    <div class="gen-label reveal">The Vision</div>
+    <div class="gen-quote reveal">
+      We want to build a <span>Generator</span> — students who leave Schuylkill County to gain skills and perspective, then come back to the Skook to innovate from the inside out. <span>What was once here, we bring back in new ways.</span>
+    </div>
+    <div class="gen-attr reveal">— Greg Macer, Supervisor of STEM &amp; District Support, IU29</div>
+    <p class="reveal" style="margin-top: 1.5rem; font-size: 0.84rem; line-height: 1.7; color: rgba(255,255,255,0.32); font-weight: 300; font-style: italic; max-width: 600px;">This isn't a strategic vision statement. It's what happens when you grow up here and want something better for the kids who come after you.</p>
+  </div>
+</section>
+
+<!-- ══ SKOOK FACT ══ -->
+<div class="skook-fact">
+  <div class="skook-badge">Skook Fact</div>
+  <p class="skook-text"><strong>"Schuylkill"</strong> is derived from Dutch, meaning <em>hidden river</em> — named by early European explorers who struggled to find the river's mouth through the dense marshlands. A hidden river. A hidden potential. <strong>We're here to uncover both.</strong></p>
+</div>
+
+<!-- ══ CONNECT ══ -->
+<section class="connect" id="connect">
+  <div class="connect-inner">
+    <div class="connect-text reveal">
+      <div class="section-eyebrow">Get Started</div>
+      <h2>The conversation<br>starts <em>here.</em></h2>
+      <p class="section-lead">You've been building something worth connecting to. So have we. The form takes two minutes. The conversation takes thirty. And what happens after that is up to both of us — no pressure, no commitment, no awkward follow-up sequence.</p>
+      <p class="section-lead" style="margin-top: 1.25rem;">It's an invitation to help shape something that will last longer than any program subscription or diagnostic test.</p>
+      <p class="section-lead" style="margin-top: 1.25rem;"><strong>The students are already here. The river is already here. The ridge is already here. We just need to connect them.</strong></p>
+
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">stem@iu29.org</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-label">Response Time</div>
+            <div class="contact-value">Within 2 business days</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><circle cx="12" cy="11" r="3"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-label">Location</div>
+            <div class="contact-value">Schuylkill Intermediate Unit 29 · Pottsville, PA</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-label">Contact</div>
+            <div class="contact-value">Greg Macer · Supervisor of STEM &amp; District Support<br><span style="font-size:0.82rem; font-weight:400; color: var(--text-light);">mrmacer.com · IU29</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connect-form reveal">
+      <div class="form-title">Express Your Interest</div>
+      <div class="form-sub">Tell us who you are. We'll figure out the rest.</div>
+
+      <div class="form-row-wrap">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="Jane">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Smith">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Organization / School / Business</label>
+        <input type="text" placeholder="Acme Manufacturing, Pottsville SD, etc.">
+      </div>
+
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="you@yourorg.com">
+      </div>
+
+      <div class="form-group">
+        <label>I represent…</label>
+        <select>
+          <option value="">Select your sector</option>
+          <option>A Business or Employer</option>
+          <option>A School or District</option>
+          <option>A Nonprofit or Community Organization</option>
+          <option>Higher Education</option>
+          <option>A Library or Cultural Organization</option>
+          <option>I'm an Individual / Community Member</option>
+          <option>Conservation or Environmental Organization</option>
+          <option>Workforce Agency / CareerLink</option>
+          <option>County or Government Agency</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>What brings you here? (Optional)</label>
+        <textarea placeholder="Tell us about your organization and what kind of partnership you're thinking about…"></textarea>
+      </div>
+
+      <button class="btn-submit" onclick="handleSubmit(event)">Send My Interest →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-brand">
+    <div class="footer-mark">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <path d="M8 1L14 5V11L8 15L2 11V5L8 1Z" stroke="white" stroke-width="1.2" fill="none"/>
+        <circle cx="8" cy="8" r="2" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="footer-brand-text">
+      <strong>Schuylkill IU29</strong>
+      STEM Ecosystem Initiative · Pottsville, PA
+    </div>
+  </div>
+  <div class="footer-copy">© 2025 Schuylkill Intermediate Unit 29 · <a href="https://iu29.org">iu29.org</a></div>
+  <div class="footer-nav">
+    <a href="#why">Why It Matters</a>
+    <a href="#programs">Programs</a>
+    <a href="#partners">Partners</a>
+    <a href="#districts">Districts</a>
+    <a href="#connect">Partner With Us</a>
+  </div>
+</footer>
+
+<script>
+  // Tab switching
+  function showTab(id, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target;
+    btn.textContent = '✓ Interest Received — We\'ll Be In Touch!';
+    btn.style.background = '#2d5231';
+    btn.disabled = true;
+  }
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  revealEls.forEach(el => observer.observe(el));
+
+  // Nav background on scroll
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.background = window.scrollY > 60
+      ? 'rgba(12,16,20,0.97)'
+      : 'rgba(12,16,20,0.85)';
+  });
+</script>
+
+</body>
+</html>
